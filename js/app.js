@@ -12,7 +12,7 @@
          if (!window.indexedDB) {
             window.alert("Your browser doesn't support a stable version of IndexedDB.")
          }
-         
+         const all_data=[]
          const employeeData = [
             { id: "00-01", name: "gopal", age: 35, email: "gopal@tutorialspoint.com" },
             { id: "00-02", name: "prasad", age: 32, email: "prasad@tutorialspoint.com" }
@@ -64,12 +64,17 @@
                var cursor = event.target.result;
                
                if (cursor) {
+                  all_data.push(cursor)
+                  
                 console.log("Name for id " + cursor.key + " is " + cursor.value.name + ", Age: " + cursor.value.age + ", Email: " + cursor.value.email);
                   cursor.continue();
                } else {
                 console.log("No more entries!");
+                console.log("all_data",all_data);
                }
             };
+
+            
          }
          
          function add() {
