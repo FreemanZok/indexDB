@@ -50,7 +50,7 @@
             request.onsuccess = function(event) {
                // Do something with the request.result!
                if(request.result) {
-                  console.log("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
+                  console.log("get result",request.result);
                } else {
                 console.log("Kenny couldn't be found in your database!");
                }
@@ -75,14 +75,27 @@
          function add() {
             var request = db.transaction(["employee"], "readwrite")
             .objectStore("employee")
-            .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+            .add({ id: "00-03", name: "ali bagher", age: 19, email: "kenny@planet.org" });
             
             request.onsuccess = function(event) {
-                console.log("Kenny has been added to your database.");
+                console.log("added", event);
             };
             
             request.onerror = function(event) {
                 console.log("Unable to add data\r\nKenny is aready exist in your database! ");
+            }
+         }
+         function addFile(myFILE) {
+            var request = db.transaction(["employee"], "readwrite")
+            .objectStore("employee")
+            .add({ id: "00-04", name: "ali bagher 4 AST", age: 19, email:myFILE });
+            
+            request.onsuccess = function(event) {
+                console.log("added myFILE", event);
+            };
+            
+            request.onerror = function(event) {
+                console.log("Unable to myFILE ");
             }
          }
          
@@ -95,3 +108,22 @@
                alert("Kenny's entry has been removed from your database.");
             };
          }
+
+
+
+
+
+
+
+
+
+
+
+
+         // Example usage
+const audioInput = document.getElementById('audio-input');
+
+audioInput.addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  addFile(file);
+});
